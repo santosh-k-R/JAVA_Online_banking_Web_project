@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+	<data-sources />
+	<form-beans>
+		<form-bean name="profile" type="com.dts.dae.model.Profile" />
+		<form-bean name="BankBranchMasterForm"
+			type="com.dts.SBIBanking.model.BankBranchMasterForm" />
+		<form-bean name="AccountTypeMasterForm"
+			type="com.dts.SBIBanking.model.AccountTypeMasterForm" />
+		<form-bean name="branchServiceMaster"
+			type="com.dts.SBIBanking.model.BranchServcesMaster" />
+		<form-bean name="BankServicesMasterForm"
+			type="com.dts.SBIBanking.model.BankServicesMasterForm" />
+		<form-bean name="customerTransacationmodel"
+			type="com.dts.SBIBanking.model.CustomerTransactionModel" />
+		<form-bean name="fundsTransfermodel"
+			type="com.dts.SBIBanking.model.FundsTransferModel" />
+		<form-bean name="bankchequeRequestForm"
+			type="com.dts.SBIBanking.model.BankChequeRequestForm" />
+		<form-bean name="chequeIssueMaster"
+			type="com.dts.SBIBanking.model.ChequeIssueMaster" />
+		<form-bean name="stoppaymentmodel"
+			type="com.dts.SBIBanking.model.StopPaymentModule" />
+
+	</form-beans>
+	<global-exceptions />
+	<global-forwards />
+	<action-mappings>
+		<action attribute="profile" name="profile"
+			path="/registerAction" scope="request"
+			type="com.dts.project.action.RegisterAction" validate="false">
+			<forward name="registerSuccess"
+				path="/Success.jsp?status=Registeration Success" />
+			<forward name="registerFail"
+				path="/Success.jsp?status=Registeration Fail" />
+		</action>
+		<action attribute="profile" name="profile" path="/AccountUnlock"
+			scope="request" type="com.dts.project.action.AccountUnlock"
+			validate="false">
+			<forward name="AccountUnLockSuccess"
+				path="/ViewCustomerAccountLocked.jsp?status=Account UnLock Success" />
+			<forward name="AccountUnLockFail"
+				path="/ViewCustomerAccountLocked.jsp?status=Account UnLock Fail" />
+		</action>
+		<action attribute="profile" name="profile"
+			path="/customerregisterAction" scope="request"
+			type="com.dts.project.action.RegisterAction" validate="false">
+			<forward name="registerSuccess"
+				path="/Success1.jsp?status=Registeration Success" />
+			<forward name="registerFail"
+				path="/Success1.jsp?status=Registeration Fail" />
+		</action>
+		<action path="/loginAction"
+			type="com.dts.project.action.LoginAction" validate="false">
+			<forward name="admin" path="/AdminHome1.jsp" />
+			<forward name="Employee" path="/EmployeeHome.jsp" />
+			<forward name="Customer" path="/CustomerHome.jsp" />
+			<forward name="invalid"
+				path="/LoginForm.jsp?status=Invalid Userid and password please try again....." />
+			<forward name="Fail" path="/LoginForm.jsp" />
+		</action>
+
+		<action path="/bankBranchAction"
+			type="com.dts.project.action.BankBranchAction"
+			name="BankBranchMasterForm">
+			<forward name="success"
+				path="/Success.jsp?status=Branch Details Registered Successfully" />
+			<forward name="fail"
+				path="/Success.jsp?status=Branch Details Registeration Fail" />
+
+		</action>
+		<action path="/viewBranchAction"
+			type="com.dts.project.action.ViewBranchAction">
+			<forward name="ViewBranches"
+				path="/ViewBankBranchMaster.jsp" />
+			<forward name="norecords"
+				path="/Success.jsp?status=No Records Found" />
+
+		</action>
+		<action path="accounttypemaster"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/AccountTypeMaster.jsp" />
+		<action attribute="AccountTypeMasterForm"
+			name="AccountTypeMasterForm" path="/accountTypeAction"
+			scope="request" type="com.dts.project.action.AccountTypeAction"
+			validate="false">
+			<forward name="success"
+				path="/Success.jsp?status=Account Type Registered Successfully" />
+			<forward name="fail"
+				path="/Success.jsp?status=Account Type Registeration Fail" />
+
+
+		</action>
+		<action path="/viewAccountTypes"
+			type="com.dts.project.action.ViewAccountTypes" validate="false">
+			<forward name="ViewAccountTypes"
+				path="/ViewAccountTypeMaster.jsp" />
+			<forward name="norecords"
+				path="/Success.jsp?status=No Records Found" />
+
+		</action>
+		<action attribute="branchServiceMaster"
+			name="branchServiceMaster" path="/registerAccountTypes"
+			scope="request" type="com.dts.project.action.RegisterAccountTypes"
+			validate="false">
+			<forward name="success"
+				path="/Success.jsp?status=Branch Account type Registeration Success" />
+			<forward name="fail"
+				path="/Success.jsp?status=Branch Account type Registeration Fail" />
+
+		</action>
+
+		<action path="/accounttypeservices"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/BankServicesMaster.jsp" />
+		<action attribute="BankServicesMasterForm"
+			name="BankServicesMasterForm" path="/bankServiceMasterAction"
+			scope="request" type="com.dts.project.action.BankServiceMasterAction"
+			validate="false">
+			<forward name="success"
+				path="/Success.jsp?status=Services Registered Successfully" />
+			<forward name="fail"
+				path="/Success.jsp?status=Service Registeration Failed" />
+		</action>
+		<action path="/viewServiceAction"
+			type="com.dts.project.action.ViewServiceAction">
+			<forward name="ViewBankServices"
+				path="/ViewBankServicesMaster.jsp" />
+			<forward name="norecords"
+				path="/Success.jsp?status=No Records Found" />
+
+		</action>
+		<action type="org.apache.struts.actions.ForwardAction"
+			path="/branchServices" parameter="/BranchServiceMaster.jsp" />
+
+		<action path="/branchServiceAction"
+			type="com.dts.project.action.BranchServiceAction"
+			name="branchServiceMaster">
+
+			<forward name="success"
+				path="/Success.jsp?status=Branch Services Registeration Success" />
+			<forward name="fail"
+				path="/Success.jsp?status=Branch Services Registeration Fail" />
+
+		</action>
+		<action path="/branchServiceAction"
+			type="com.dts.project.action.BranchServiceAction"
+			name="branchServiceMaster">
+
+			<forward name="success"
+				path="/Success.jsp?status=Branch Services Registeration Success" />
+			<forward name="fail"
+				path="/Success.jsp?status=Branch Services Registeration Fail" />
+
+		</action>
+		<action path="/viewEmployeeAction"
+			type="com.dts.project.action.ViewEmployeeAction" validate="false">
+			<forward name="ViewEmployees" path="/ViewEmployees.jsp" />
+			<forward name="norecords"
+				path="/Success.jsp?status=No Records Found" />
+
+		</action>
+		<action path="/customerTransaction"
+			type="com.dts.project.action.CustomerTransaction"
+			name="customerTransacationmodel">
+			<forward name="success"
+				path="/Success1.jsp?status=Transaction Successfully" />
+			<forward name="fail"
+				path="/Success1.jsp?status=Transaction Failed" />
+
+		</action>
+		<action path="/employeeProfile"
+			type="com.dts.project.action.EmployeeProfile" validate="false">
+			<forward name="ViewProfile" path="/EmployeeProfile.jsp" />
+		</action>
+		<action path="/employeeUpdateProfile"
+			type="com.dts.project.action.EmployeeUpdateProfile" name="profile">
+			<forward name="success"
+				path="/Success1.jsp?status=Employee Details Updated Successfully" />
+			<forward name="fail"
+				path="/Success1.jsp?status=Employee Details Updated Failed" />
+		</action>
+		<action path="/adminProfile"
+			type="com.dts.project.action.EmployeeProfile" validate="false">
+			<forward name="ViewProfile" path="/AdminProfile.jsp" />
+		</action>
+		<action path="/adminUpdateProfile"
+			type="com.dts.project.action.EmployeeUpdateProfile" name="profile">
+			<forward name="success"
+				path="/Success.jsp?status=Admin Details Updated Successfully" />
+			<forward name="fail"
+				path="/Success.jsp?status=Admin Details Updated Failed" />
+		</action>
+
+		<action path="/customerProfile"
+			type="com.dts.project.action.EmployeeProfile" validate="false">
+			<forward name="ViewProfile" path="/CustomerProfile.jsp" />
+		</action>
+		<action path="/customerUpdateProfile"
+			type="com.dts.project.action.EmployeeUpdateProfile" name="profile">
+			<forward name="success"
+				path="/Success2.jsp?status=Employee Details Updated Successfully" />
+			<forward name="fail"
+				path="/Success2.jsp?status=Employee Details Updated Failed" />
+		</action>
+
+		<action path="/customerviewBranchAction"
+			type="com.dts.project.action.ViewBranchAction">
+			<forward name="ViewBranches"
+				path="/CustomerViewBankBranchMaster.jsp" />
+			<forward name="norecords"
+				path="/Success.jsp?status=No Records Found" />
+
+		</action>
+
+		<action path="/employeeviewBranchAction"
+			type="com.dts.project.action.ViewBranchAction">
+			<forward name="ViewBranches"
+				path="/EmployeeViewBankBranchMaster.jsp" />
+			<forward name="norecords"
+				path="/Success.jsp?status=No Records Found" />
+
+		</action>
+		<action path="/fundsTransferAction"
+			type="com.dts.project.action.FundsTransferAction" validate="false"
+			name="fundsTransfermodel">
+			<forward name="success"
+				path="/Success2.jsp?status=Funds Transfered Successfully" />
+			<forward name="fail"
+				path="/Success2.jsp?status=Funds Transfered Failed" />
+		</action>
+		<action path="/chequeBookRequestAction"
+			type="com.dts.project.action.ChequeBookRequestAction"
+			validate="false" name="bankchequeRequestForm">
+			<forward name="success"
+				path="/Success2.jsp?status=Cheque Book Request Send Successfully" />
+			<forward name="fail"
+				path="/Success2.jsp?status=Cheque Book Request Send  Failed" />
+
+		</action>
+		<action path="/viewChequeBookRequest"
+			type="com.dts.project.action.ViewChequeBookRequest"
+			validate="false">
+			<forward name="ViewChequebook"
+				path="/EmployeeViewChequeBooks.jsp" />
+			<forward name="norecords"
+				path="/Success1.jsp?status=No Records Found" />
+
+		</action>
+		<action attribute="chequeIssueMaster" name="chequeIssueMaster"
+			path="/chequeIssueAction" scope="request"
+			type="com.dts.project.action.ChequeIssueAction" validate="false">
+			<forward name="success"
+				path="/Success1.jsp?status=cheque Issued Successfully" />
+			<forward name="fail"
+				path="/Success1.jsp?status=Cheques Issued Failed" />
+		</action>
+		<action path="/viewCustomerChequeBookRequest"
+			type="com.dts.project.action.ViewChequeBookRequest"
+			validate="false">
+			<forward name="ViewChequebook"
+				path="/CustomerViewChequeBooks.jsp" />
+			<forward name="norecords"
+				path="/Success1.jsp?status=No Records Found" />
+
+		</action>
+		<action path="/StopPaymentAction"
+			type="com.dts.project.action.StopPaymentAction"
+			name="stoppaymentmodel">
+			<forward name="success"
+				path="/Success2.jsp?status=cheque Payment Stopped" />
+			<forward name="fail"
+				path="/Success2.jsp?status=Cheque Payment Stopped Failed" />
+		</action>
+		<action path="/customerChangePassword"
+			type="com.dts.project.action.ChangePassword" validate="false">
+			<forward name="success"
+				path="/Success2.jsp?status=Password Changed Successfully" />
+			<forward name="fail"
+				path="/Success2.jsp?status=Password Change Failed" />
+
+		</action>
+		<action path="/adminChangePassword"
+			type="com.dts.project.action.ChangePassword" validate="false">
+			<forward name="success"
+				path="/Success.jsp?status=Password Changed Successfully" />
+			<forward name="fail"
+				path="/Success.jsp?status=Password Change Failed" />
+
+		</action>
+		<action path="/employeeChangePassword"
+			type="com.dts.project.action.ChangePassword" validate="false">
+			<forward name="success"
+				path="/Success1.jsp?status=Password Changed Successfully" />
+			<forward name="fail"
+				path="/Success1.jsp?status=Password Change Failed" />
+
+		</action>
+
+	</action-mappings>
+
+	<message-resources
+		parameter="com.yourcompany.struts.ApplicationResources" />
+</struts-config>
+
